@@ -1,0 +1,54 @@
+#### Ubuntu18.10  #### 
+
+1、安装erlang
+
+由于rabbitMq需要erlang语言的支持，在安装rabbitMq之前需要安装erlang
+
+sudo apt-get install erlang-nox
+
+2、安装Rabbitmq
+更新源
+
+sudo apt-get update
+
+安装
+
+sudo apt-get install rabbitmq-server
+
+启动、停止、重启、状态rabbitMq命令
+
+    sudo rabbitmq-server start
+    sudo rabbitmq-server stop
+    sudo rabbitmq-server restart
+    sudo rabbitmqctl status
+	invoke-rc.d rabbitmq-server status 
+	
+3、添加admin，并赋予administrator权限
+
+添加admin用户，密码设置为admin。
+
+sudo rabbitmqctl add_user  admin  admin  
+
+查看用户
+sudo rabbitmqctl list_users
+
+赋予权限
+
+sudo rabbitmqctl set_user_tags admin administrator 
+
+赋予virtual host中所有资源的配置、写、读权限以便管理其中的资源
+
+sudo rabbitmqctl  set_permissions -p / admin '.*' '.*' '.*'
+
+4、Web管理器连接
+
+打开管理页面
+sudo rabbitmq-plugins enable rabbitmq_management
+
+浏览器访问 http://127.0.0.1:15672
+
+
+参考：
+https://www.rabbitmq.com/install-debian.html
+https://blog.csdn.net/u010889616/article/details/80643892
+
