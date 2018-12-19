@@ -1,0 +1,77 @@
+MQTT-server:Mosquitto
+http://mosquitto.org/
+http://mosquitto.org/download/
+https://mosquitto.org/documentation/
+#### Ubuntu18.10  #### 
+#1.引入mosquitto仓库并更新
+$sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+$sudo apt-get update
+
+#2.安装mosquitto包
+$sudo apt-get install mosquitto
+
+#3.安装mosquitto开发包
+$sudo apt-get install libmosquitto-dev
+
+# mv /etc/mosquitto/mosquitto.conf.example /etc/mosquitto/mosquitto.conf
+
+mosquitto -c /etc/mosquitto/mosquitto.conf 
+
+#4.安装mosquitto客户端
+sudo apt-get install mosquitto-clients
+
+#5.查询mosquitto是否正确运行
+5.1 查询mosquitto服务状态
+$sudo service mosquitto status 
+
+ mosquitto.service - LSB: mosquitto MQTT v3.1 message broker
+   Loaded: loaded (/etc/init.d/mosquitto; generated)
+   Active: active (running) since Tue 2018-12-11 07:32:25 CST; 3h 52min ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 837 ExecStart=/etc/init.d/mosquitto start (code=exited, status=0/SUCC
+    Tasks: 1 (limit: 4915)
+   Memory: 4.2M
+   CGroup: /system.slice/mosquitto.service
+           └─877 /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
+
+12月 11 07:32:25 valiantzh-U systemd[1]: Starting LSB: mosquitto MQTT v3.1 messa
+12月 11 07:32:25 valiantzh-U mosquitto[837]:  * Starting network daemon: mosquit
+12月 11 07:32:25 valiantzh-U mosquitto[837]:    ...done.
+12月 11 07:32:25 valiantzh-U systemd[1]: Started LSB: mosquitto MQTT v3.1 m
+
+5.2开启/停止mosquitto服务
+sudo service mosquitto start
+sudo service mosquitto stop
+
+#6. 测试：
+6.1>  打开两个Terminal窗口
+6.2> 订阅一个主题
+$mosquitto_sub -h localhost -t "mqtt" -v
+6.3> 在另一窗口推送消息
+$mosquitto_pub -h localhost -t "mqtt" -m "Hello MQTT"
+OK 这时会在订阅窗口看到推送的信息
+
+mqtt Hello MQTT
+#7. 网络测试（test.mosquitto.org）
+从test.mosquitto.org订阅所有主题，任何人发布的任何消息你都可以收到，你会看到大量有趣消息滚动在你的屏幕上。
+你也可以发布一些有趣的消息，所有订阅的人也同样会收到。
+
+$mosquitto_sub -h test.mosquitto.org -t "#" -v
+
+当然，你也可以只订阅特定主题，用来接收你自己的消息
+$mosquitto_sub -h test.mosquitto.org -t "msg_only_from_me_z" -v
+
+在另外一个终端上发布消息到特定主题，消息"My cat is Luna"应该会显示在上一个终端上
+
+$mosquitto_pub -h test.mosquitto.org -t "msg_only_from_me_z" -m "My cat is dcdz"
+
+$netstat -tunlp|grep 1883 #查看端口是否被监听
+
+#集群部署
+https://github.com/hui6075/mosquitto-cluster/blob/master/readme.md
+
+启动服务   mosquitto -c /etc/mosquitto/mosquitto.conf
+
+
+参考
+https://blog.csdn.net/swedenfeng/article/details/53510048

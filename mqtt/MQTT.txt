@@ -1,0 +1,50 @@
+
+按照OSI网络分层模型，IP是网络层协议，TCP是传输层协议，而HTTP和MQTT是应用层的协议。在这三者之间， TCP是HTTP和MQTT底层的协议。MQTT（Message Queuing Telemetry Transport，消息队列遥测传输）是IBM开发的一个即时通讯协议.MQTT over Websocket
+
+http://mqtt.org/
+https://github.com/mqtt/mqtt.github.io/wiki/software?id=software
+https://github.com/mqtt/mqtt.github.io/wiki/servers
+https://github.com/mqtt/mqtt.github.io/wiki/libraries
+
+
+MQTT协议是广泛应用的物联网协议，使用测试MQTT协议需要MQTT的代理。有两种方法使用MQTT服务，一是租用现成的MQTT服务器，如阿里云，百度云，华为云等公用的云平台提供的MQTT服务，使用公用的MQTT服务器的好处是省事，但如果仅仅用于测试学习还需要注册帐号，灵活性差些，有的平台还需要付费。另一方法是自己使用开源的MQTT组件来搭建。
+
+MQTT服务器非常多，如apache的ActiveMQ，emtqqd，HiveMQ，Emitter，Mosquitto，Moquette等等。
+
+
+三种消息发布服务质量:
+"至多一次"，消息发布完全依赖底层 TCP/IP 网络。会发生消息丢失或重复。这一级别可用于如下情况，环境传感器数据，丢失一次读记录无所谓，因为不久后还会有第二次发送。
+"至少一次"，确保消息到达，但消息重复可能会发生。
+"只有一次"，确保消息到达一次。这一级别可用于如下情况，在计费系统中，消息重复或丢失会导致不正确的结果。
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+MQTT 3.1和3.1.1版的区别
+
+在3.1.1版中，主要的改变有6个：
+1）Session Present Flag
+    如果客户端使用持久会话进行连接（这意味着客户端不使用干净的会话），那么在CONNACK消息会引入一个额外的标志，以指示该Broker代理已经有了与客户端早先的会话信息（比如客户端订阅信息、队列消息活其他信息）。这是一个重要的新功能，它可以实现更高效的通信。现在，客户端得到反馈，如果Broker经纪人已经有了客户端的订阅，如果标志设置为false，那么客户端只需订阅新主题。
+
+2）失败订阅的附加错误码
+    在MQTT 3.1.1之前，客户端要查询自己的订阅是否被Broker经纪人批准，这是不可能的。这种情况在采用细粒度权限的MQTT主题管理时就可能出现。在3.1.1版新规范中，在MQTT SUBACK消息中新增了一个错误码0x80，让​​客户端知道自己的订阅是否被禁止。
+
+3）匿名MQTT客户端
+    如果使用场景需要临时的或匿名的MQTT客户端，在3.1.1版得到支持，可以设置MQTT客户端标识符为零字节长度。那么MQTT的Broker会自动分配给客户端一个临时的随机标识符。这一个特性非常有用，尤其是当客户端只需做发布、不需要订阅的情况，此时客户端无需做基于客户端ID的授权。
+
+4）即时发布或不等待响应的突发MQTT消息
+    3.1.1版为MQTT客户端设计了一个非常有趣的新功能，那就是客户端可以直接发送MQTT PUBLISH消息而无需等待Broker的CONNACK响应。这非常适用于微型、受限的MQTT客户端做连接CONNECT、发布PUBLISH、断开DISCONNECT，而不需要处理来自Broker的响应的情况。这也适用于只关心尽可能发送数据而不维持长时间TCP连接的处于突发模式的客户端。当然，成熟的Broker在检查客户端是否被允许发布到这些主题之前，是不会发布消息的。
+
+5）客户端ID可以很长
+    在MQTT 3.1版，每个客户ID不能超过23字节，这一点非常不方便，并能导致许多麻烦，例如客户端标识符要使用UUID的场景。在3.1.1版，Broker可以使用65535字节的客户端ID。
+
+6）其他低级别的更改
+    在CONNECT的Header报头中，协议名从MQIsdp改为MQTT。这节省了两字节的开销，并使得协议名称更易读。
+所有的字符串编码现在统一为UTF-8。
+    协议级字节从3字节增加到4字节。
+    在WebSockets上的MQTT通信（MQTT over WebSockets）现在终于确定。在IANA的标识符是mqtt。
+
+原文：https://blog.csdn.net/qq_21842575/article/details/82760457 
+https://blog.csdn.net/tcjy1000/article/details/61427862
+
+
+http://www.emqtt.com/
