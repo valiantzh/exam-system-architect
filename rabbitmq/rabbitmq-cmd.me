@@ -35,8 +35,9 @@ rabbitmqctl add_user mqtt-test mqtt-test
 rabbitmqctl set_permissions -p / mqtt-test ".*" ".*" ".*"
 rabbitmqctl set_user_tags mqtt-test management
  
- 
-add_user <username> <password>
+
+#rabbitmqctl
+    add_user <username> <password>
     add_vhost <vhost>
     authenticate_user <username> <password>
     await_online_nodes <count> [-t <timeout>]
@@ -119,7 +120,33 @@ set_disk_free_limit mem_relative <fraction>
     trace_on [-p <vhost>]
     update_cluster_nodes <existing_cluster_member_node_to_seed_from>
     wait [<pid_file>] [--pid|-P <pid>] [-t <timeout>]
-     
+
+######## rabbitmq-plugins 
+https://www.rabbitmq.com/man/rabbitmq-plugins.8.html
+
+rabbitmq-plugins	[-n node] command [command_options]
+
+##rabbitmq-plugins list [-Eemv] [pattern]
+rabbitmq-plugins list  -e      #Show only explicitly or implicitly enabled plugins.
+rabbitmq-plugins list  -E      #Show only explicitly enabled plugins.
+rabbitmq-plugins list -m     #Show only plugin names (minimal).
+rabbitmq-plugins list  -v      #This command lists all plugins whose name contains "management".
+rabbitmq-plugins list -v management     #This command lists all implicitly or explicitly enabled RabbitMQ plugins.
+ 
+rabbitmq-plugins list -e rabbit
+
+##rabbitmq-plugins enable  [--offline] [--online] plugin ...
+##rabbitmq-plugins disable    [--offline] [--online] plugin ...
+
+
+Config file /etc/rabbitmq/rabbitmq.config
+Database directory /var/lib/rabbitmq/mnesia/rabbit@VM-42-237-ubuntu
+Log file /var/log/rabbitmq/rabbit@VM-42-237-ubuntu.log
+SASL log file /var/log/rabbitmq/rabbit@VM-42-237-ubuntu-sasl.log
+
+/etc/rabbitmq/enabled_plugins
+
+
 ####  角色说明 ####  
 none  最小权限角色
 无法登陆管理控制台，通常就是普通的生产者和消费者。
