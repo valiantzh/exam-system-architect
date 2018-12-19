@@ -1,0 +1,82 @@
+
+一、Nginx安装
+
+
+http://www.runoob.com/linux/nginx-install-setup.html
+
+nginx重新加载配置
+/usr/local/nginx-1.5.1/sbin/nginx  -s reload
+
+
+nginx重启几种方法
+
+ps -ef|grep nginx
+
+平滑重启命令：
+kill -HUP 住进称号或进程号文件路径
+或者使用
+
+/usr/nginx/sbin/nginx -s reload
+
+
+
+注意，修改了配置文件后最好先检查一下修改过的配置文件是否正 确，以免重启后Nginx出现错误影响服务器稳定运行。
+
+判断Nginx配置是否正确命令如下：
+nginx -t -c /usr/nginx/conf/nginx.conf
+或者
+
+/usr/nginx/sbin/nginx -t
+
+nginx  reload 重启
+
+执行
+
+# /usr/local/nginx/sbin/nginx -s reload 
+/usr/local/nginx-1.5.1/sbin/nginx -s reload 
+nginx已经重启成功
+
+Centos nginx重启
+
+开机自启动
+vi nginx.sh
+cp nginx.sh /etc/init.d/nginx
+chmod 777 /etc/init.d/nginx
+chkconfig --list | grep nginx
+
+设置开机默认启动
+
+chkconfig --add nginx //添加系统服务
+chkconfig  nginx on
+#chkconfig --level 345 nginx on //设置开机启动,启动级别
+chkconfig --list nginx //查看开机启动配置信息
+5.nginx控制命令
+
+service nginx start   #开启
+service nginx stop    #停止
+service nginx restart #重启
+service nginx reload  #重新加载
+
+
+重启Nginx
+
+service nginx restart
+/etc/init.d/nginx stop
+/etc/init.d/nginx start
+
+Ubuntu Nginx
+
+$sudo service nginx start
+$sudo service nginx stop
+
+ps -ef|grep nginx
+./nginx stop
+./nginx start
+
+
+
+
+
+
+
+
