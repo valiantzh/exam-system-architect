@@ -1,0 +1,124 @@
+################################## Ubuntu18.10  Mysql WorkBench ##################################  
+sudo apt-get install mysql-workbench
+
+################################## Ubuntu18.10  Mysql ##################################  
+https://www.cnblogs.com/jpfss/p/7944622.html
+
+一、通过APT方式安装
+
+说明：此种方式完全参考官方提供的教程https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/。
+
+注意：通过APT方式安装的版本都是现在最新的版本，现在我安装的是5.7.18。通过这种方式安装好之后开机自启动都已经配置好，和命令行上的环境变量，无需手动配置。
+
+1、（可省略）下载官方提供的mysql-apt-config.deb包进行APT源设置，下载地址：https://dev.mysql.com/downloads/repo/apt/
+
+二、通过下载离线安装包DEB Bundle进行安装
+
+说明：参考官方安装文档，参考：https://dev.mysql.com/doc/refman/5.7/en/linux-installation-debian.html
+
+1、下载：
+
+其实DEB Bundle类型就是离线deb安装包，把所有软件打包进去了。
+
+登录站点：https://dev.mysql.com/downloads/mysql/
+
+2、解压
+tar xvf mysql-server_5.7.18-1ubuntu16.04_amd64.deb-bundle.tar 
+
+3、安装
+
+#libaio 如果系统中尚未存在库，则 可能需要安装该库：
+sudo apt-get install libaio1
+#使用以下命令预配置MySQL服务器软件包：
+sudo dpkg-preconfigure mysql-community-server_*.deb
+#提示：将被要求为root用户提供您的MySQL安装密码。
+#对于MySQL服务器的基本安装，请安装数据库公用文件包，客户端包，客户端元包，服务器包和服务器元包（按此顺序）; 可以使用单个命令来执行此操作：
+#注意：下面这条命令不能直接运行，应该拆开来按中括号里面以逗号分开的顺序进行安装，比如：
+#sudo dpkg -i mysql-{common,community-client,client,community-server,server}_*.deb
+sudo dpkg -i mysql-common_*.deb
+sudo dpkg -i mysql-community-client_*.deb
+sudo dpkg -i mysql-client_*.deb
+sudo apt-get install libmecab2
+sudo dpkg -i mysql-community-server_*.deb
+sudo dpkg -i mysql-server_*.deb
+#如果中途被dpkg警告未满足的依赖关系 ，可以使用apt-get来修复它们，然后再运行中断的命令 ：
+sudo apt-get -f install
+
+
+4、安装后的操作：
+
+说明：通过这种方式安装好之后开机自启动都已经配置好，和命令行上的环境变量，无需手动配置。
+
+安装好之后会创建如下目录：
+
+数据库目录：/var/lib/mysql/ 
+
+配置文件：/usr/share/mysql（命令及配置文件） ，/etc/mysql（如：my.cnf）
+
+相关命令：/usr/bin(mysqladmin mysqldump等命令) 和/usr/sbin
+
+启动脚本：/etc/init.d/mysql（启动脚本文件mysql的目录）
+
+测试：
+
+#服务启动后端口查询
+sudo netstat -anp | grep mysql
+
+#服务管理
+#启动
+sudo service mysql start
+#停止
+sudo service mysql stop
+#服务状态
+sudo service mysql status
+
+
+5、配置 -mysql 5.7
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf 
+
+
+5.1修改字符集&表名大小写区分
+show variables like 'character_set_%';  
+
+#在[mysqld]下添加
+collation_server = utf8_general_ci
+character_set_server = utf8
+
+#表名大小写区分修改 [mysqld]后添加：（其中 0：区分大小写，1：不区分大小写）
+lower_case_table_names=1
+
+5.2修改数据路径
+service mysql stop #迁移前必须停止mysql
+
+创建mysql 存放的目标文件夹 mkdir /home/valiantzh/work/mysql/data
+修改所属用户和用户组 chown -R mysql:mysql /home/valiantzh/work/mysql
+
+修改权限 sudo chmod -R 700 /home/valiantzh/work/mysql
+
+/*迁移文件 cp -a /var/lib/mysql/* /home/valiantzh/work/mysql/data/
+
+修改配置文件 vi /etc/mysql/mysql.conf.d/mysqld.cnf
+
+datadir         = /home/valiantzh/work/mysql/data/
+
+以上mysql 配置完毕，在ubuntu还有些敏感操作受到了 apparmor.d 的限制，mysql也受到了限制，vi /etc/apparmor.d/usr.sbin.mysqld 将/var/lib/mysql 修改为/home/valiantzh/work/mysql/data/
+
+vi /etc/apparmor.d/usr.sbin.mysqld 
+
+  /home/valiantzh/work/mysql/data/ r,
+  /home/valiantzh/work/mysql/data/** rwk,
+
+
+重新加载apparmor 和 启动mysql
+
+service apparmor reload  #不需要重启
+*/
+
+service mysql start
+
+show variables like '%datadir%'；
+
+
+
+GRANT ALL ON dbs_server.* TO 'dbsadmin'@'localhost' IDENTIFIED BY 'dbsadmin_dcdz';
+GRANT ALL ON dcdz_csp.* TO 'dcdz'@'localhost' IDENTIFIED BY 'dcdz123456';
