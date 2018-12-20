@@ -1,0 +1,141 @@
+################################## 项目管理工具 ##################################  
+
+1. draw.io   代替viso and dia
+https://www.draw.io/
+
+
+/////////////////////////////////
+viso PK dia
+
+在ubuntu下，dia可以完成viso在Windows中所但任的角色。
+
+sudo apt-get install dia
+
+LibreOffice Draw 可以打开.vsd文件
+
+关于ubuntu下dia绘图工具中文输入问题
+$ sudo gedit /usr/bin/dia
+原内容：
+dia-normal --integrated "$@"
+改为：
+dia-normal "$@"
+
+
+网上有改动 /usr/bin/dia 文件来输入中文的方法，但是无效。其实，只需要修改工具栏中的 Input Methods，将其选中最下面的X Input Method，就可以切换输入法了。
+
+
+
+
+2. project 
+
+2.1 ganttproject
+https://www.ganttproject.biz/
+https://www.ganttproject.biz/download/free
+
+
+
+2.2 projectlibre
+https://sourceforge.net/projects/projectlibre/
+
+sudo alien projectlibre-1.8.0-1.rpm          
+sudo dpkg -i projectlibre_1.8.0-2_all.deb 
+
+
+ubuntu环境下，planner 用起来也和windows环境下的project一样方便。
+
+
+MPP文件怎么打开 五种方法最合适
+https://blog.csdn.net/liu22985342/article/details/41673827
+方法一：Gantter.com
+
+Gantter是一个免费的基于Web的项目管理工具。你可以认为它是一个基于Web的Microsoft Project。一个实用功能之一是它能够导入MPP文件。
+方法二：Project Viewer Central
+
+这是一款可以用来打开查看MPP文件的工具，你可以访问Project Viewer Central的网站。似乎也支持在线浏览，不过功能我没有尝试，你可以尝试一下，也可以下载试用。
+
+方法三：Kadonk LiveProject
+
+LiveProject是免费的项目查看器，可以用来打开MPP文件。它是独立自由的，甚至一些商业应用中都免费使用。现在你不需要安装Microsoft Project。
+
+方法四：Microsoft Project
+
+毫无疑问，你可以选择用它来打开MPP，不过它的体积、及收费等等让我我实在不想多说什么。官方网址在这里
+
+方法五： Projec.to在线浏览工具
+
+Projec.to是一个在线应用程序，允许您查看和共享mpp文件。你可以直接在浏览器中输入Projec.to访问。
+
+################################## 数据库建模工具  ##################################  
+1、OpenSystemArchitect
+官方网址：http://www.codebydesign.com/
+ERD (Logical & Physical)
+ERD supports inheritance
+ERD validation
+ERD documentation
+SQL editor
+workspace/project environment
+cross-platform (MS Windows, Linux, OSX)
+cross-database (ODBC)
+compliance with industry standards
+
+System Architect is available under the General Public License (GPL) for educational use. All other Users must purchase a license. System Architect is powerful enough to compare favourably with products costing thousands of dollars.
+
+tar zxvf 
+
+2、Mysql WorkBench
+官方网址：http://dev.mysql.com/workbench/
+支持数据库：MySQL
+支持系统：Windows  macOS，linux
+MySQL open source software is provided under the GPL License.
+
+3、 Navicat Data Modeler
+官方网址：https://www.navicat.com.cn
+支持数据库：Navicat Data Modeler 支持各种数据库系统，包括 MySQL、MariaDB、Oracle、SQL Server、PostgreSQL 和 SQLite。
+支持系统：Windows  macOS，linux
+费用：2,799.00
+
+
+
+
+
+4、ERDesigner NG
+官方网址：http://mogwai.sourceforge.net/?Welcome:ERDesigner_NG
+属于sourceforge的一个开源产品
+
+
+ERMaster
+ModelRight3
+官方网址为：http://www.modelright.com/Default.aspx
+
+
+##################################  xmind ##################################  
+1：xmind官方下载地址
+
+http://www.xmind.net/download/linux/
+
+2：下载完成后解压到制定目录下
+
+sudo mkdir /usr/local/xmind
+
+sudo unzip xmind-8-update8-linux.zip -d  /usr/local/xmind/xmind-8-update8-linux
+
+sudo chmod -R 777 xmind-8-update8-linux
+
+1：创建快捷方式快速启动
+
+sudo gedit /usr/share/applications/xmind.desktop
+
+2：粘贴以下内容
+
+    [Desktop Entry]
+    Encoding=UTF-8
+    Version=1.0
+    Type=Application
+    Name=XMind
+    Icon=/usr/local/xmind/xmind-8-update8-linux/xmind.png
+    Path=/usr/local/xmind/xmind-8-update8-linux/XMind_amd64
+    Exec=/usr/local/xmind/xmind-8-update8-linux/XMind_amd64/XMind
+    Categories=Application
+    Terminal=false
+    StartupWMClass=XMind;
+

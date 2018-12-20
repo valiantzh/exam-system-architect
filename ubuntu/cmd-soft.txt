@@ -1,0 +1,18 @@
+
+
+################################## Ubuntu18.10  FileZilla ##################################  
+ FileZilla Client
+
+安装filezilla ：sudo apt-get install filezilla
+
+再装个语言包：sudo apt-get install filezilla-locales
+
+安装完语言包就可以支持中文了
+
+
+apt install vim
+
+
+
+
+

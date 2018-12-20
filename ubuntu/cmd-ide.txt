@@ -1,0 +1,222 @@
+
+
+##################################  Gradle ##################################  
+https://gradle.org/releases/
+gradle-4.10.2-all.zip
+
+unzip gradle-4.10.2-all.zip
+sudo mkdir  /usr/local/gradle
+sudo mv gradle-4.10.2 /usr/local/gradle/
+
+#gradle
+export GRADLE_HOME=/usr/local/gradle/gradle-4.10.2
+export PATH=$PATH:$GRADLE_HOME/bin
+
+
+sudo useradd gradle -d /usr/local/gradle
+
+sudo vim /etc/passwd
+
+sudo chown -R gradle:gradle /usr/local/gradle
+sudo chmod -R o+w /usr/local/gradle
+################################## Ubuntu18.10  android studio ##################################  
+
+https://developer.android.google.cn/studio/#downloads
+
+tar -zxvf android-studio.tar.gz
+sudo mv android-studio /usr/local/android/
+
+sudo vim /usr/share/applications/android-studio.desktop
+
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Android Studio
+Comment=android studio
+Icon=/usr/local/android/android-studio/bin/studio.png
+Exec=/usr/local/android/android-studio/bin/studio.sh
+Categories=Application
+Terminal=false
+
+
+https://services.gradle.org/distributions/
+////////////////////////////////////////////////////////////////////////////////
+mirrors.neusoft.edu.cn
+
+端口号为 80
+Android SDK 在线更新镜像服务器资源：
+
+大连东软信息学院镜像服务器地址:
+- http://mirrors.neusoft.edu.cn 端口：80
+北京化工大学镜像服务器地址:
+- IPv4: http://ubuntu.buct.edu.cn/ 端口：80
+- IPv4: http://ubuntu.buct.cn/ 端口：80
+- IPv6: http://ubuntu.buct6.edu.cn/ 端口：80
+上海GDG镜像服务器地址:
+- http://sdk.gdgshanghai.com 端口：8000
+
+使用方法：
+1，启动 Android SDK Manager ，打开主界面，依次选择『Tools』、『Options...』，弹出『Android SDK Manager - Settings』窗口；
+2，在『Android SDK Manager - Settings』窗口中，在『HTTP Proxy Server」和「HTTP Proxy Port』输入框内填入上面镜像服务器地址和端口，并且选中『Force https://... sources to be fetched using http://...』复选框。设置完成后单击『Close』按钮关闭『Android SDK Manager - Settings』窗口返回到主界面；
+3，依次选择『Packages』、『Reload』。r
+
+##################################  Android SDK##################################  
+http://tools.android-studio.org/index.php/sdk
+
+tar -zxvf android-sdk_r24.4.1-linux.tgz
+
+sudo mkdir /usr/local/android
+
+sudo mv android-sdk-linux /usr/local/android
+
+cd /usr/local/android/
+
+sudo mv android-sdk-linux sdk
+
+sudo vim /etc/profile
+
+#android-sdk
+export ANDROID_HOME=/usr/local/android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+################################## Ubuntu18.10  IDEA##################################  
+tar -zxvf ideaIU-2018.2.6-no-jdk.tar.gz 
+
+sudo mkdir /usr/local/idea
+
+
+
+sudo mv idea-IU-182.5107.16 /usr/local/idea/
+
+sudo cp  JetbrainsCrack-3.1-release-enc.jar /usr/local/idea/idea-IU-182.5107.16/bin/
+
+sudo chmod 755 JetbrainsCrack-3.1-release-enc.jar
+
+cd /usr/local/idea/idea-IU-182.5107.16/bin
+
+sudo chmod +x *.sh
+
+sudo vi idea.vmoptions 
+sudo vi idea64.vmoptions
+
+-javaagent:/usr/local/idea/idea-IU-182.5107.16/bin/JetbrainsCrack-3.1-release-enc.jar
+
+
+/usr/local/idea/idea-IU-182.5107.16
+
+sudo vim /usr/share/applications/intellij-idea.desktop
+
+[Desktop Entry]
+Name=IntelliJ IDEA
+Exec=/usr/local/idea/idea-IU-182.5107.16/bin/idea.sh
+Comment=IntelliJ IDEA
+Icon=/usr/local/idea/idea-IU-182.5107.16/bin/idea.png
+Type=Application
+Terminal=false
+Encoding=UTF-8
+
+
+获取注册码：
+http://idea.lanyus.com/
+
+
+################################## Ubuntu18.10  eclipse ##################################  
+sudo tar -zxvf eclipse-inst-linux64.tar.gz
+
+sudo vim /usr/share/applications/eclipse.desktop
+
+[Desktop Entry]
+Name=Eclipse
+Comment=Eclipse
+Exec=/usr/local/eclipse/jee/eclipse
+Icon=/usr/local/eclipse/jee/icon.xpm
+Type=Application
+Terminal=false
+Encoding=UTF-8
+
+cd /usr/share/applications/ 
+
+cp /usr/share/applications/eclipse.desktop  /home/valiantzh/桌面/
+
+#################  eclipse   subversion #################
+sudo apt install subversion
+
+Subversion Native Library Not Available
+http://subclipse.tigris.org/wiki/JavaHL
+1. 安装libsvn-java：在终端输入下面两个命令。(use the following instructions to install libsvn-java )
+
+sudo apt-get update 
+sudo apt-get install libsvn-java
+
+2. 查找刚刚安装的依赖库的位置。(find the libraries just installed)
+sudo find / -name libsvnjavahl-1.so
+
+/usr/lib/x86_64-linux-gnu/jni/libsvnjavahl-1.so
+
+3. 复制依赖库到jre里对应的位置 (copy the libraries into jre lib dir)
+32位系统 (32bit):
+
+cp /usr/lib/x86_64-linux-gnu/jni/libsvnjavahl-1* $JAVA_HOME/jre/lib/i386
+64位系统 (64bit):
+
+cp /usr/lib/x86_64-linux-gnu/jni/libsvnjavahl-1* $JAVA_HOME/jre/lib/amd64
+
+或编辑 eclipse.ini 文件：
+cd /usr/local/eclipse/jee/
+sudo vi eclipse.ini
+
+在 -vmargs 行下面增加脚本：
+
+-Djava.library.path=/usr/lib/x86_64-linux-gnu/jni
+
+4. 重新打开eclipse (restart your eclipse)
+
+eclipse 安装svn插件
+
+http://subclipse.tigris.org/update_1.12.x
+
+https://github.com/subclipse/subclipse/wiki
+
+    SVN 1.9.x - https://dl.bintray.com/subclipse/archive/release/1.12.x/
+    SVN 1.8.x - https://dl.bintray.com/subclipse/archive/release/1.10.x/
+    SVN 1.7.x - https://dl.bintray.com/subclipse/archive/release/1.8.x/
+
+
+################################## Ubuntu18.10  rabbitvcs ##################################  
+rabbitvcs  SVN-Client&GIT-Client
+
+RabbitVCS官网：http://www.rabbitvcs.org/easonjim
+http://wiki.rabbitvcs.org/wiki/install/ubuntu
+1、添加PPA源
+sudo add-apt-repository ppa:rabbitvcs/ppa
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 34EF4A35
+
+
+2、执行更新
+sudo apt-get update
+
+3、安装依赖库
+sudo apt-get install python-nautilus python-configobj python-gtk2 python-glade2 python-svn python-dbus python-dulwich subversion meld
+
+4、安装RabbitVCS
+sudo apt-get install rabbitvcs-cli rabbitvcs-core rabbitvcs-gedit rabbitvcs-nautilus
+
+5、如果在文件夹上鼠标右键没有显示RabbitVCS菜单，则依次执行下面命令后重试。
+nautilus -q 
+nautilus
+或者重新启动电脑。
+
+参考：
+http://wiki.rabbitvcs.org/wiki/install/ubuntu
+http://www.linuxdiyf.com/linux/29153.html
+
+
+
+
+
+
+
+
+

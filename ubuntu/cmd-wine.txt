@@ -1,0 +1,33 @@
+################################## Ubuntu18.10 wine ##################################  
+
+https://wiki.winehq.org/Ubuntu
+
+
+wget -nc https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_18.10_standard/Release.key
+sudo apt-key add Release.key
+sudo apt-add-repository 'deb https://download.opensuse.org/repositories/Emulators:/Wine:/Debian/Ubuntu_18.10_standard ./'
+
+
+Update packages:
+
+sudo apt-get update
+
+
+ Stable branch 	    sudo apt-get install --install-recommends winehq-stable
+
+Development branch 	sudo apt-get install --install-recommends winehq-devel
+
+Staging branch 	sudo apt-get install --install-recommends winehq-staging
+
+
+
+https://wiki.winehq.org/Gecko
+
+winecfg
+
+
+
+
+err:module:import_dll Library MFC42.DLL 
+
+

@@ -1,0 +1,109 @@
+develop
+
+################################## Ubuntu18.10  环境变量 ##################################  
+sudo vim /etc/profile
+
+#set java environment
+export JAVA_HOME=/usr/local/java/jdk1.8.0_191
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+export PATH=.:$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+#TOMCAT
+export TOMCAT_HOME=/usr/local/tomcat/apache-tomcat-8.5.35
+
+#MAVEN
+export M2_HOME=/usr/local/maven/apache-maven-3.6.0
+export MAVEN_HOME=$M2_HOME
+export CLASSPATH=$CLASSPATH:$M2_HOME/lib
+export PATH=$PATH:$M2_HOME/bin
+
+export GRADLE_HOME=/usr/local/gradle/gradle-4.10.2
+export PATH=$PATH:$GRADLE_HOME/bin
+
+export NEXUS_HOME=/usr/local/nexus/nexus-3.13.0-01
+export PATH=$PATH:$NEXUS_HOME/bin
+
+#ActiveMQ
+export ACTIVEMQ_HOME=/usr/local/activemq/apache-activemq-5.15.8
+export PATH=$PATH:$ACTIVEMQ_HOME/bin
+
+sudo vim /etc/environment
+
+echo $PATH
+
+source /etc/profile
+################################## Ubuntu18.10  maven ##################################  
+sudo mkdir /usr/local/maven
+sudo tar  zxvf  apache-maven-3.6.0-bin.tar.gz 
+
+sudo mv apache-maven-3.6.0 /usr/local/maven/
+
+sudo useradd maven
+
+sudo vim /etc/passwd
+
+sudo chown -R maven:maven /usr/local/maven
+sudo chown -R maven:rdgroup /usr/local/maven
+
+maven:x:1002:1002::/usr/local/maven:/bin/bash
+
+vi /etc/profile
+export M2_HOME=/usr/local/maven/apache-maven-3.6.0
+export MAVEN_HOME=$M2_HOME
+export CLASSPATH=$CLASSPATH:$M2_HOME/lib
+export PATH=$PATH:$M2_HOME/bin
+
+/usr/local/maven/repo
+
+chmod  -R +x /usr/local/maven/apache-maven-3.6.0/bin
+sudo chmod -R g+w  /usr/local/maven/repo
+
+################################## Ubuntu18.10  TOMCAT ##################################  
+sudo  tar -zxvf apache-tomcat-8.5.35.tar.gz
+
+sudo mv apache-tomcat-8.5.35 /usr/local/tomcat/
+
+useradd tomcat 
+sudo chown -R tomcat:rdgroup  /usr/local/tomcat
+
+
+sudo chmod 775 -R /usr/local/tomcat
+
+################################## Ubuntu18.10  JDK ##################################  
+ 手动安装oracle JDK
+
+    1.去oracle官网下载,链接点此。也可以使用wget http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.tar.gz 安装包在你执行这个命令时所在的文件夹位置。
+
+　 2.解压 tar -zxvf jdk-8u191-linux-x64.tar.gz 
+
+　 3.移动到自己想放的位置：
+
+　　　　mkdir /usr/local/java
+
+　　　　mv jdk1.8.0_191  /usr/local/java/
+
+　 4.设置环境变量：
+
+方案一：修改全局配置文件，作用于所有用户：vim /etc/profile 
+
+　　　　export JAVA_HOME=/usr/local/java/jdk1.8.0_191
+
+　　　　export JRE_HOME=${JAVA_HOME}/jre
+
+　　　　export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+
+　　　　export PATH=.:${JAVA_HOME}/bin:$PATH
+
+方案二：修改当前用户配置文件，只作用于当前用户：vim ~/.bashrc 设置与上一样
+
+　 5.使修改的配置立刻生效：source /etc/profile 或者 source ~/.bashrc
+
+　 6.检查是否安装成功：java -version
+
+
+chmod  -R +x  /usr/local/java/jdk1.8.0_191/bin
+
+useradd java
+chown -R java:java  /usr/local/java
+
+

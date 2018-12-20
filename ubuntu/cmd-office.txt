@@ -1,0 +1,177 @@
+
+/etc/apt/sources.list.d/
+
+#桌面快捷方式
+ln -s /home/valiantzh/work/rd/java/dc            /home/valiantzh/桌面/dc-java
+ln -s /home/valiantzh/work/rd/android/dc    /home/valiantzh/桌面/dc-android
+ln -s /home/valiantzh/work/svn/dc                   /home/valiantzh/桌面/dc-svn
+
+ln -s /home/valiantzh/work/rd/java/study     /home/valiantzh/桌面/study-java
+ln -s /home/valiantzh/work/rd/study-src       /home/valiantzh/桌面/study-src
+ln -s /home/valiantzh/work/study/study-notes /home/valiantzh/桌面/study-notes
+
+################################## Ubuntu18.10  办公软件 ##################################  
+##########Conky Set up 系统监测
+
+sudo apt install conky-all
+Conky Manager是一款简单的图形化工具，用以管理Linux桌面conky scripts。
+
+http://www.teejeetech.in/p/conky-manager.html
+https://github.com/teejee2008/conky-manager/releases
+
+wget --no-check-certificate https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.run
+chmod +x conky-manager-v2.4-amd64.run
+sudo ./conky-manager-v2.4-amd64.run
+
+/*sudo apt-get install realpath
+wget https://github.com/teejee2008/conky-manager/releases/download/v2.4/conky-manager-v2.4-amd64.deb
+sudo dpkg -i conky-manager-v2.4-amd64.deb
+*/
+
+/*sudo add-apt-repository ppa:teejee2008/ppa
+sudo apt-get update
+sudo apt-get install conky-manager */
+
+########## Screenlet
+
+########## variety
+
+Variety可以在Ubuntu上实现桌面壁纸的自动轮播,壁纸定期更换,以及一些特效等。官方站点:http://peterlevi.com/variety/。通过以下命令进行安装:
+
+sudo add-apt-repository ppa:peterlevi/ppa
+sudo apt-get update
+sudo apt-get install variety
+
+########## 桌面便签小工具-Indicator Stickynotes
+sudo add-apt-repository ppa:umang/indicator-stickynotes
+sudo apt-get update 
+sudo apt-get install indicator-stickynotes
+
+
+##########meld 对比工具
+sudo apt-get install meld
+
+##########chrome
+http://www.google.cn/intl/zh-CN/chrome/browser/desktop/index.html
+
+Proxy SwitchyOmega扩展程序
+
+switchyomega
+
+################################## Ubuntu  mailspring ##################################  
+https://www.addictivetips.com/ubuntu-linux-tips/install-mailspring-on-linux/
+
+sudo snap install mailspring
+
+下载离线包安装
+
+$tar zxvf mailspring.tar.gz 
+
+$cd mailspring/
+
+$sudo snap ack  mailspring_284.assert
+$ sudo snap install mailspring_284.snap
+
+################################## Ubuntu  screenlets ##################################  
+sudo add-apt-repository ppa:screenlets/ppa
+sudo apt-get update
+sudo apt-get install screenlets
+
+################################## Ubuntu18.10 WPS ##################################  
+linux.wps.cn
+
+##################################  微信&钉钉 ##################################  
+
+https://github.com/nashaofu/dingtalk/
+
+https://github.com/geeeeeeeeek/electronic-wechat/releases
+
+mv linux-x64.tar.gz  electronic-wechat-linux-x64.tar.gz
+tar -zxvf electronic-wechat-linux-x64.tar.gz
+
+sudo  mkdir /opt/wechat
+sudo mv electronic-wechat-linux-x64 /opt/wechat/
+
+sudo cp /media/valiantzh/3853-D3E9/soft-linux/wx.png  /opt/wechat/electronic-wechat-linux-x64/wx.png
+
+sudo vim /usr/share/applications/electronic-wechat.desktop
+
+[Desktop Entry]
+Name=wechat
+Type=Application
+Exec=/opt/wechat/electronic-wechat-linux-x64/electronic-wechat
+Icon=/opt/wechat/electronic-wechat-linux-x64/wx.png
+Terminal=false
+
+################################## Ubuntu18.10  Iptux（飞秋FeiQ） ##################################  
+https://blog.csdn.net/a2013126370/article/details/78669409
+sudo apt-get install iptux
+iptux
+
+
+################################## Ubuntu18.10  SecureCRT ##################################  
+
+sudo apt-get autoremove --purge  SecureCRT 
+
+
+wget http://download.boll.me/securecrt_linux_crack.pl
+
+sudo perl securecrt_linux_crack.pl  /usr/bin/SecureCRT
+crack successful
+
+License:
+
+	Name:		xiaobo_l
+	Company:	www.boll.me
+	Serial Number:	03-94-294583
+	License Key:	ABJ11G 85V1F9 NENFBK RBWB5W ABH23Q 8XBZAC 324TJJ KXRE5D
+	Issue Date:	04-20-2017
+
+sudo perl securefx_linux_crack_.pl /usr/bin/SecureFX 
+
+License:
+Name: ygeR
+
+Company: TEAM ZWT
+
+Serial Number:06-70-001589
+
+License Key: ACUYJV Q1V2QU 1YWRCN NBYCYK ABU767 D4PQHA S1C4NQ GVZDQF
+
+Issue Date: 03-10-2017
+
+License:
+
+	Name:	lxyg06
+	Company:	nbrc
+	Serial Number:	06-67-005597
+	License Key:	ACUYJV Q1V2QU 1YWRCN NBYCYK AC1BZ7 NCZ4DQ C728ZD B5Y5XY
+	Issue Date:	06-15-2015
+
+################################## Ubuntu18.10 安装搜狗输入法  ##################################  
+Ubuntu软件中心，在搜索栏输入fcitx，将会搜出fcitx，然后按照一般软件安装步骤安装即可完成升级
+
+
+################################## Ubuntu18.10  notepadqq ##################################  
+
+
+vim /etc/apt/sources.list.d/notepadqq-team-ubuntu-notepadqq-cosmic.list
+
+sudo vim notepadqq-team-ubuntu-notepadqq-cosmic.list
+
+cosmic (18.10版本代号)改成xenial（16.04版本代号）
+
+
+Ubuntu下的安装方法:
+
+sudo add-apt-repository ppa:notepadqq-team/notepadqq
+
+sudo apt-get update
+
+sudo apt-get install notepadqq
+
+Ubuntu下的卸载方法:
+
+sudo apt-get remove notepadqq
+
+sudo add-apt-repository --removeppa:notepadqq-team/notepadqq

@@ -1,0 +1,57 @@
+################################## Ubuntu18.10   nexus##################################  
+
+tar  -zxvf  nexus-3.13.0-01-unix.tar.gz
+
+mkdir /usr/local/nexus
+
+mv nexus-3.13.0-01   /usr/local/nexus
+mv sonatype-work /usr/local/nexus
+useradd nexus
+
+###将用户nexus用户的主目录变更为 /usr/local/nexus
+vim /etc/passwd
+
+nexus:x:1001:1001::/usr/local/nexus:/bin/bash
+
+chown -R nexus:nexus /usr/local/nexus
+
+修改 bin/nexus.rc， 修改内容为
+run_as_user="nexus"
+
+#启动
+./nexus run
+
+sudo gedit nexus
+
+修改 /etc/profile文件 添加 
+export NEXUS_HOME=/usr/local/nexus/nexus-3.13.0-01
+export PATH=$PATH:$NEXUS_HOME/bin
+
+
+source /etc/profile
+
+开机自启动
+建立软连接
+ln -s $NEXUS_HOME/bin/nexus  /etc/init.d/nexus
+
+给nexus授权
+chmod 755 /etc/init.d/nexus
+
+将nexus设置为系统服务 
+update-rc.d nexus defaults
+
+service nexus start
+
+ service --status-all 
+ service nexus status
+
+
+
+systemctl list-units ##列出当前系统服务的状态 
+
+systemctl list-unit-files ##列出服务的开机状态 
+
+systemctl status nexus ##查看指定服务的状态 
+
+
+
